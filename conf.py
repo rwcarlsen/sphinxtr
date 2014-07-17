@@ -36,9 +36,9 @@ source_suffix = '.rst'
 source_encoding = 'utf-8-sig'
 
 # General information about the project.
-project = u'The Sphinx Thesis Resource (sphinxtr)'
-author = u'Jeff Terrace'
-copyright = u'by %s, 2012.' % author
+project = 'The Sphinx Thesis Resource (sphinxtr)'
+author = 'Jeff Terrace'
+copyright = 'by %s, 2012.' % author
 version = '0.1'
 release = '0.1'
 
@@ -182,7 +182,7 @@ htmlhelp_basename = 'htmlhelpoutput'
 
 ADDITIONAL_PREAMBLE = """
 \input{preamble._tex}
-\usepackage{sphinx}
+\\usepackage{sphinx}
 """
 
 ADDITIONAL_FOOTER = """

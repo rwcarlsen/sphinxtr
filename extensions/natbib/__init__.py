@@ -13,7 +13,7 @@ import pybtex.style.names.lastfirst
 import pybtex.backends.plaintext
 
 import collections
-import .latex_codec as latex_codec
+from . import latex_codec
 import os
 import re
 
@@ -190,7 +190,7 @@ class CitationTransform(object):
     
     for i, ref in enumerate(self.refs):
       authors = ref.persons.get('author', [])
-      author_text = self.get_author(authors, all_auths).decode('latex')
+      author_text = self.get_author(authors, all_auths)#.decode('latex')
       lrefuri = refuri + '#citation-' + nodes.make_id(ref.key)
       
       if i > 0 and i < len(self.refs):
@@ -255,7 +255,7 @@ def sort_references(refs, citations):
   def sortkey(key):
     # sort by author last names, but if no author, sort by title
     citation = citations.get(key)
-    authorsort = u''.join(map(unicode, citation.persons.get('author', '')))
+    authorsort = u''.join(map(str, citation.persons.get('author', '')))
     if len(authorsort) > 0:
         authorsort = authorsort.replace('{', '')
         authorsort = authorsort.replace('}', '')

@@ -90,7 +90,7 @@ def doctree_resolved(app, doctree, docname):
         
         secnums = []
         fignames_by_secnum = {}
-        for figdocname, figurelist in env.docname_figs.iteritems():
+        for figdocname, figurelist in env.docname_figs.items():
             if figdocname not in env.toc_secnumbers:
                 continue
             secnum = env.toc_secnumbers[figdocname]['']
@@ -103,7 +103,7 @@ def doctree_resolved(app, doctree, docname):
         for secnum in secnums:
             if secnum[0] != last_secnum:
                 figid = 1
-            for figname, subfigs in fignames_by_secnum[secnum].iteritems():
+            for figname, subfigs in fignames_by_secnum[secnum].items():
                 figids[figname] = str(secnum[0]) + '.' + str(figid)
                 for i, subfigname in enumerate(subfigs):
                     subfigid = figids[figname] + chr(ord('a') + i)
@@ -120,7 +120,7 @@ def doctree_resolved(app, doctree, docname):
             fignum = figids[id]
             for cap in figure_info.traverse(nodes.caption):
                 cap.insert(1, nodes.Text(" %s" % cap[0]))
-                if fignum[-1] in map(str, range(10)):
+                if fignum[-1] in list(map(str, list(range(10)))):
                     boldcaption = "%s %s:" % (app.config.figure_caption_prefix, fignum)
                 else:
                     boldcaption = "(%s)" % fignum[-1]
