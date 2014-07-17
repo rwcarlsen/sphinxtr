@@ -13,7 +13,7 @@ import pybtex.style.names.lastfirst
 import pybtex.backends.plaintext
 
 import collections
-import latex_codec
+import .latex_codec as latex_codec
 import os
 import re
 
@@ -420,7 +420,7 @@ class CitationReferencesDirective(Directive):
 
     if pub is None:
       howpub = ref.fields.get('howpublished')
-      if howpub is not None and howpub.startswith('\url{'):
+      if howpub is not None and howpub.startswith('\\url{'):
         url = howpub[5:-1]
         refnode = nodes.reference('', '', internal=False, refuri=url)
         refnode += nodes.Text(url, url)
