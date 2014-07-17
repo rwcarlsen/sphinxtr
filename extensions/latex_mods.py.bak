@@ -27,7 +27,7 @@ class DocTranslator(BaseTranslator):
         else:
             look_node = node.parent
 
-        short_caption = str(look_node.get('alt', '')).translate(tex_escape_map)
+        short_caption = unicode(look_node.get('alt', '')).translate(tex_escape_map)
         if short_caption != "":
             short_caption = '[%s]' % short_caption
 
@@ -38,7 +38,7 @@ class DocTranslator(BaseTranslator):
         self.in_caption -= 1
 
     def visit_Text(self, node):
-        if hasattr(self, 'verbatim'):
+        if self.verbatim is not None:
             self.verbatim += node.astext()
         else:
             text = self.encode(node.astext())
@@ -125,7 +125,7 @@ class DocTranslator(BaseTranslator):
         hlcode = hlcode.replace('\$', '$')
         hlcode = hlcode.replace('\%', '%')
         # workaround for Unicode issue
-        hlcode = hlcode.replace('€', '@texteuro[]')
+        hlcode = hlcode.replace(u'€', u'@texteuro[]')
         # must use original Verbatim environment and "tabular" environment
         if self.table:
             hlcode = hlcode.replace('\\begin{Verbatim}',
@@ -174,7 +174,7 @@ class CustomLaTeXTranslator(DocTranslator):
     def astext(self):
             return (#HEADER % self.elements +
                     #self.highlighter.get_stylesheet() +
-                    ''.join(self.body)
+                    u''.join(self.body)
                     #'\n' + self.elements['footer'] + '\n' +
                     #self.generate_indices() +
                     #FOOTER % self.elements

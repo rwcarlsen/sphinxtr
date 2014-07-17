@@ -185,12 +185,12 @@ class CitationTransform(object):
       node = nodes.inline('', '', classes=['citation'])
     
     if self.pre:
-      pre = u"%s " % self.pre.decode('latex')
+      pre = u"%s " % self.pre #.decode('latex')
       node += nodes.inline(pre, pre, classes=['pre'])
     
     for i, ref in enumerate(self.refs):
       authors = ref.persons.get('author', [])
-      author_text = self.get_author(authors, all_auths)#.decode('latex')
+      author_text = self.get_author(authors, all_auths) #.decode('latex')
       lrefuri = refuri + '#citation-' + nodes.make_id(ref.key)
       
       if i > 0 and i < len(self.refs):
@@ -242,7 +242,7 @@ class CitationTransform(object):
           node += nodes.inline(bc, bc)
     
     if self.post:
-      post = u", %s" % self.post.decode('latex')
+      post = u", %s" % self.post #.decode('latex')
       node += nodes.inline(post, post, classes=['post'])  
     
     if (cmd.startswith('p') or cmd == 'yearpar') and style != 'super':
@@ -371,7 +371,7 @@ class CitationReferencesDirective(Directive):
       authortext = namestyler.format(author, abbr=True).format().render(plaintext)
       authortext = authortext.replace('{', '')
       authortext = authortext.replace('}', '')
-      authortext = authortext.decode('latex')
+      authortext = authortext #.decode('latex')
       text = authortext
 
       text = text.strip()
@@ -390,7 +390,7 @@ class CitationReferencesDirective(Directive):
     if title is None:
         title = ref.fields.get('key')
     if title:
-      title = title.decode('latex')
+      title = title #.decode('latex')
       title = title.replace('{', '')
       title = title.replace('}', '')
       node += nodes.inline(title, title, classes=['title'])
@@ -399,7 +399,7 @@ class CitationReferencesDirective(Directive):
     # @phdthesis
     if ref.type == 'phdthesis':
         school = ref.fields.get('school')
-        school = school.decode('latex')
+        school = school #.decode('latex')
         text = 'PhD Thesis, %s, ' % school
         node += nodes.inline(text, text)
     
@@ -408,7 +408,7 @@ class CitationReferencesDirective(Directive):
     if not pub:
         pub = ref.fields.get('booktitle')
     if pub:
-      pub = pub.decode('latex')
+      pub = pub #.decode('latex')
       pub = pub.replace('{', '')
       pub = pub.replace('}', '')
       node += nodes.emphasis(pub, pub, classes=['publication'])
@@ -429,17 +429,17 @@ class CitationReferencesDirective(Directive):
           node += nodes.inline(', ', ', ')
     
     if vol:
-      vol = vol.decode('latex')
+      vol = vol #.decode('latex')
       node += nodes.inline(vol, vol, classes=['volume'])
       node += nodes.inline(':', ':')
     
     if pages:
-      pages = pages.decode('latex')
+      pages = pages #.decode('latex')
       node += nodes.inline(pages, pages, classes=['pages'])
       node += nodes.inline(', ', ', ')
     
     if year:
-      year = year.decode('latex')
+      year = year #.decode('latex')
       node += nodes.inline(year, year, classes=['year'])
       node += nodes.inline('.', '.')
       
